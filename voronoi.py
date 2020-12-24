@@ -17,18 +17,19 @@ random.seed()
 def recolor():
     pixelarray = pygame.PixelArray(gameDisplay)
 
-    for i in range(0, SCREEN_WIDTH):
-        for j in range(0, SCREEN_HEIGHT):
-            min_distance = MASSIVE_VALUE
-            index = 0
-            for k in range (0,len(list_of_positions)):
-                temp_x, temp_y, temp_color = list_of_positions[k]
-                if min_distance > ((temp_x - i) * (temp_x - i) + (temp_y - j) * (temp_y - j)):
-                    min_distance = ((temp_x - i) * (temp_x - i) + (temp_y - j) * (temp_y - j))
-                    index = k
+    if len(list_of_positions) > 0:
+        for i in range(0, SCREEN_WIDTH):
+            for j in range(0, SCREEN_HEIGHT):
+                min_distance = MASSIVE_VALUE
+                index = 0
+                for k in range (0,len(list_of_positions)):
+                    temp_x, temp_y, temp_color = list_of_positions[k]
+                    if min_distance > ((temp_x - i) * (temp_x - i) + (temp_y - j) * (temp_y - j)):
+                        min_distance = ((temp_x - i) * (temp_x - i) + (temp_y - j) * (temp_y - j))
+                        index = k
 
-            temp_x, temp_y, temp_color = list_of_positions[index]
-            pixelarray[i][j] = temp_color
+                temp_x, temp_y, temp_color = list_of_positions[index]
+                pixelarray[i][j] = temp_color
 
 
 
@@ -43,7 +44,8 @@ while True:
             list_of_positions.append((x, y, color))
             recolor()
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == RIGHT:
-            list_of_positions.pop()
-            recolor()
+            if len(list_of_positions) > 0:
+                list_of_positions.pop()
+                recolor()
 
     pygame.display.update()
