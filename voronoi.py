@@ -22,7 +22,7 @@ def recolor():
             for j in range(0, SCREEN_HEIGHT):
                 min_distance = MASSIVE_VALUE
                 index = 0
-                for k in range (0,len(list_of_positions)):
+                for k in range(0, len(list_of_positions)):
                     temp_x, temp_y, temp_color = list_of_positions[k]
                     if min_distance > ((temp_x - i) * (temp_x - i) + (temp_y - j) * (temp_y - j)):
                         min_distance = ((temp_x - i) * (temp_x - i) + (temp_y - j) * (temp_y - j))
@@ -32,7 +32,6 @@ def recolor():
                 pixelarray[i][j] = temp_color
 
 
-
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -40,7 +39,8 @@ while True:
             quit()
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == LEFT:
             x, y = event.pos
-            color = (random.randint(COLOR_MIN_VALUE, COLOR_MAX_VALUE), random.randint(COLOR_MIN_VALUE, COLOR_MAX_VALUE), random.randint(COLOR_MIN_VALUE, COLOR_MAX_VALUE))
+            color = (random.randint(COLOR_MIN_VALUE, COLOR_MAX_VALUE), random.randint(COLOR_MIN_VALUE, COLOR_MAX_VALUE),
+                     random.randint(COLOR_MIN_VALUE, COLOR_MAX_VALUE))
             list_of_positions.append((x, y, color))
             recolor()
         elif event.type == pygame.MOUSEBUTTONDOWN and event.button == RIGHT:
